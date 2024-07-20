@@ -5,3 +5,4 @@ fastapi-users==13.0.0
 uvicorn==0.30.1
 pydantic-settings==2.3.4
 sqlalchemy==2.0.31
+dishka==1.2.0
