@@ -1,6 +1,7 @@
 asyncpg==0.29.0
 alembic==1.13.2
 fastapi==0.111.1
+fastapi-jwt==0.3.0
 uvicorn==0.30.1
 pydantic-settings==2.3.4
 sqlalchemy==2.0.31
