@@ -6,4 +6,5 @@ fastapi-jwt==0.3.0
 uvicorn==0.30.1
 pydantic-settings==2.3.4
 sqlalchemy==2.0.31
+starlette==0.38.0
 dishka==1.2.0
