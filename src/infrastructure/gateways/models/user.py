@@ -4,5 +4,5 @@ from .base import IModel
 
 
 class UserModel(IModel):
-    id = Column(Integer(), primary_key=True)
-    username = Column(String(length=32))
+    id = Column(Integer())
+    username = Column(String(length=32), primary_key=True)
