@@ -1,1 +1,1 @@
-from .gateways import models
+from . import gateways
