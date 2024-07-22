@@ -1,1 +1,1 @@
-from .repository import AbstractRepository
+from . import repositories
