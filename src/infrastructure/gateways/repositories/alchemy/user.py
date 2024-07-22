@@ -4,7 +4,7 @@ from infrastructure.datamappers.user import entity_to_model
 from infrastructure.gateways.repositories.alchemy.base import AlchemyRepository
 
 
-class TaskRepository(AlchemyRepository, AbstractUserRepository):
+class UserRepository(AlchemyRepository, AbstractUserRepository):
     def create(self, entity: UserEntity) -> UserEntity:
         self.session.add(entity_to_model(entity))
 
