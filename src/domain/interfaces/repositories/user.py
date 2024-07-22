@@ -7,4 +7,4 @@ from domain.interfaces.repositories import AbstractRepository
 class AbstractUserRepository(AbstractRepository, ABC):
     @abstractmethod
     def create(self, entity: UserEntity) -> UserEntity:
-        ...
+        raise NotImplementedError()
