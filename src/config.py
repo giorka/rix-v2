@@ -21,6 +21,7 @@ class DatabaseSettings(ISettings):
 
 class ApplicationSettings(ISettings):
     debug: bool = True
+    secret_key: str = ...
 
     db: DatabaseSettings
 
