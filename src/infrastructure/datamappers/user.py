@@ -1,3 +1,5 @@
+from dataclasses import asdict
+
 from domain.entities import UserEntity
 from ..gateways.models import UserModel
 
@@ -7,4 +9,4 @@ def model_to_entity(model: UserModel) -> UserEntity:
 
 
 def entity_to_model(entity: UserEntity) -> UserModel:
-    return UserModel(**entity.model_dump())
+    return UserModel(**asdict(entity))
