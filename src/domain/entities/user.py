@@ -1,9 +1,9 @@
 from dataclasses import dataclass
 
-from domain import entities
+from . import IEntity
 
 
 @dataclass
-class UserEntity(entities.IEntity):
+class UserEntity(IEntity):
     username: str
     password: str
