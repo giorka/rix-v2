@@ -5,7 +5,7 @@ from ..gateways.models import UserModel
 
 
 def model_to_entity(model: UserModel) -> UserEntity:
-    return UserEntity(username=model.username)
+    return UserEntity(username=model.username, password=model.username)
 
 
 def entity_to_model(entity: UserEntity) -> UserModel:
