@@ -1,10 +1,10 @@
 from abc import abstractmethod, ABC
 
-from domain.entities import UserEntity
 from domain.interfaces.repositories import AbstractRepository
+from domain.typevars import User
 
 
 class AbstractUserRepository(AbstractRepository, ABC):
     @abstractmethod
-    def create(self, entity: UserEntity) -> UserEntity:
+    def create(self, entity: User) -> User:
         raise NotImplementedError()
