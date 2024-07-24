@@ -5,6 +5,8 @@ from . import IException
 
 @dataclass(frozen=True)
 class IValidationException(IException):
+    """Base exception for validation exceptions"""
+
     pass
 
 
