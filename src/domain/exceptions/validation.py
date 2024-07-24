@@ -6,3 +6,14 @@ from . import IException
 @dataclass(frozen=True)
 class IValidationException(IException):
     pass
+
+
+@dataclass(frozen=True)
+class UserAlreadyExistsException(IValidationException):
+    """Raised when trying to create a user that already exists"""
+
+    username: str
+
+    @property
+    def message(self):
+        return f'User {self.username} Already Exists'
