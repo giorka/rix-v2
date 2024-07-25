@@ -1,20 +1,27 @@
 import asyncio
 
-from authlib.jose.errors import BadSignatureError
-from starlette import responses
+from dishka import make_async_container
+from dishka.integrations.fastapi import setup_dishka
 
 from applications.fastapi import get_application, get_server
+from dependencies import (
+    DatabaseProvider,
+    RepositoryProvider,
+    ServiceProvider
+)
 
 
 async def main() -> None:
     application = get_application()
 
-    @application.exception_handler(BadSignatureError)
-    async def handle_bad_signature_error(*args, **kwargs) -> responses.Response:
-        return responses.JSONResponse(
-            status_code=401,
-            content={'detail': 'Credentials are not provided'},
-        )
+    setup_dishka(
+        make_async_container(
+            DatabaseProvider(),
+            RepositoryProvider(),
+            ServiceProvider()
+        ),
+        app=application
+    )
 
     await get_server(application).serve()
 
