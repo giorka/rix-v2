@@ -4,6 +4,7 @@ from dishka import provide, Provider, Scope
 from sqlalchemy.ext.asyncio import async_sessionmaker, AsyncEngine, AsyncSession, create_async_engine
 
 from config import settings
+from infrastructure.gateways.repositories import alchemy as repositories
 
 
 class DatabaseProvider(Provider):
@@ -30,3 +31,9 @@ class DatabaseProvider(Provider):
         yield session
 
         await session.close()
+
+
+class RepositoryProvider(Provider):
+    @provide(scope=Scope.REQUEST)
+    def get_user_repository(self, session: AsyncSession) -> repositories.UserRepository:
+        return repositories.UserRepository(session)
