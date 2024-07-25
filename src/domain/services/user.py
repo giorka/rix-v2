@@ -14,7 +14,7 @@ class UserService:
     uow: AsyncUnitOfWork
 
     async def register(self, username: str, password: str) -> UserEntity:
-        if self.repository.get_by_username(username) is not None:
+        if await self.repository.get_by_username(username) is not None:
             raise UserAlreadyExistsException(username)
 
         hashed_password = encrypt(password)
