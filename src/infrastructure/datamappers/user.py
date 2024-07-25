@@ -1,12 +1,12 @@
 from dataclasses import asdict
 
-from domain.typevars import User
+from domain.entities import UserEntity
 from ..gateways.models import UserModel
 
 
-def model_to_entity(model: UserModel) -> User:
-    return User(username=model.username, password=model.username)
+def model_to_entity(model: UserModel) -> UserEntity:
+    return UserEntity(username=model.username)
 
 
-def entity_to_model(entity: User) -> UserModel:
+def entity_to_model(entity: UserEntity) -> UserModel:
     return UserModel(**asdict(entity))

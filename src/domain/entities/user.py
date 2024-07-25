@@ -6,4 +6,4 @@ from . import IEntity
 @dataclass
 class UserEntity(IEntity):
     username: str
-    password: str
+    password: str | None = None
