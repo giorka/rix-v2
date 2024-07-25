@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
 
+from pydantic import constr
 from pydantic_settings import BaseSettings as ISettings
 
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,7 +22,9 @@ class DatabaseSettings(ISettings):
 
 class ApplicationSettings(ISettings):
     debug: bool = True
-    secret_key: str = ...
+
+    singing_secret: str
+    hashing_secret: constr(max_length=36)
 
     db: DatabaseSettings
 
