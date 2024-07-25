@@ -4,6 +4,7 @@ from dishka import provide, Provider, Scope
 from sqlalchemy.ext.asyncio import async_sessionmaker, AsyncEngine, AsyncSession, create_async_engine
 
 from config import settings
+from domain import services
 from infrastructure.gateways.repositories import alchemy as repositories
 
 
@@ -37,3 +38,9 @@ class RepositoryProvider(Provider):
     @provide(scope=Scope.REQUEST)
     def get_user_repository(self, session: AsyncSession) -> repositories.UserRepository:
         return repositories.UserRepository(session)
+
+
+class ServiceProvider(Provider):
+    @provide(scope=Scope.REQUEST)
+    def get_user_service(self, user_repository: repositories.UserRepository) -> services.UserService:
+        return services.UserService(user_repository, user_repository.session)
