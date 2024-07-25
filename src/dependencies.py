@@ -10,7 +10,7 @@ class DatabaseProvider(Provider):
     @provide(scope=Scope.APP)
     def get_engine(self) -> AsyncEngine:
         return create_async_engine(
-            settings.db_url,
+            settings.db.url,
             echo=False,
             pool_recycle=180
         )
