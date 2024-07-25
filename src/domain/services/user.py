@@ -9,22 +9,21 @@ from domain.uow import AsyncUnitOfWork
 
 @dataclass
 class UserService:
-    # TODO: rename to _repository, _uow
-    repository: AbstractUserRepository
-    uow: AsyncUnitOfWork
+    _repository: AbstractUserRepository
+    _uow: AsyncUnitOfWork
 
     async def register(self, username: str, password: str) -> UserEntity:
-        if await self.repository.get_by_username(username) is not None:
+        if await self._repository.get_by_username(username) is not None:
             raise UserAlreadyExistsException(username)
 
         hashed_password = encrypt(password)
 
         entity = UserEntity(username, hashed_password)
-        self.repository.create(entity)
+        self._repository.create(entity)
 
-        await self.uow.commit()
+        await self._uow.commit()
 
         return entity
 
     async def get_by_username(self, username: str) -> UserEntity | None:
-        return await self.repository.get_by_username(username)
+        return await self._repository.get_by_username(username)
