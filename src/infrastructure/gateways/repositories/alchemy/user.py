@@ -1,28 +1,25 @@
 from sqlalchemy.future import select
 
+from domain.entities import UserEntity
 from domain.interfaces.repositories import AbstractUserRepository
-from domain.typevars import User
 from infrastructure.datamappers.user import entity_to_model, model_to_entity
 from infrastructure.gateways.models import UserModel
 from infrastructure.gateways.repositories.alchemy.base import AlchemyRepository
 
 
 class UserRepository(AlchemyRepository, AbstractUserRepository):
-    def create(self, entity: User) -> User:
+    def create(self, entity: UserEntity) -> UserEntity:
         self.session.add(entity_to_model(entity))
 
         return entity
 
-    async def get_by_username(self, username: str) -> User | None:
-        response = await self.session.execute(
+    async def get_by_username(self, username: str) -> UserEntity | None:
+        obj = await self.session.scalar(
             select(UserModel)
-            .where(User.username == username)
+            .where(UserModel.username.__eq__(username))
         )
-        obj = response.one_or_none()
 
-        if not obj:
+        if obj is None:
             return None
 
-        model = obj[0]
-
-        return model_to_entity(model)
+        return model_to_entity(obj)
