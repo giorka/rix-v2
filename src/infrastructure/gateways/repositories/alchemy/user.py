@@ -4,7 +4,7 @@ from domain.entities import UserEntity
 from domain.interfaces.repositories import AbstractUserRepository
 from infrastructure.datamappers.user import entity_to_model, model_to_entity
 from infrastructure.gateways.models import UserModel
-from infrastructure.gateways.repositories.alchemy.base import AlchemyRepository
+from infrastructure.gateways.repositories.alchemy import AlchemyRepository
 
 
 class UserRepository(AlchemyRepository, AbstractUserRepository):
