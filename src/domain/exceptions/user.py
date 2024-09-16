@@ -20,3 +20,15 @@ class UserAlreadyExistsException(IUserException):
     def message(self):
         return f'User {self.username} Already Exists'
 
+
+@dataclass(frozen=True)
+class UserDoesNotExistException(IUserException):
+    """Raised when trying to create a user that does not exist"""
+
+    username: str
+
+    @property
+    def message(self):
+        return f'User {self.username} Does Not Exist'
+
+
