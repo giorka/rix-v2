@@ -32,3 +32,13 @@ class UserDoesNotExistException(IUserException):
         return f'User {self.username} Does Not Exist'
 
 
+@dataclass(frozen=True)
+class IncorrectCredentialsException(IUserException):
+    """Raised when trying to log into a user account when credentials are incorrect"""
+
+    username: str
+    password: str
+
+    @property
+    def message(self):
+        return f'{self.username}\'s Password Does Not Match {self.password}'
