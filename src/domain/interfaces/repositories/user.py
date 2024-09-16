@@ -1,7 +1,7 @@
 from abc import abstractmethod, ABC
 
 from domain.entities import UserEntity
-from domain.interfaces.repositories import AbstractRepository
+from .base import AbstractRepository
 
 
 class AbstractUserRepository(AbstractRepository, ABC):
