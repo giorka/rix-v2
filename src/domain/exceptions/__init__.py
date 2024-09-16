@@ -1,2 +1,7 @@
 from .base import IException
-from .validation import UserAlreadyExistsException
+from .user import (
+    IUserException,
+    UserAlreadyExistsException,
+    UserDoesNotExistException,
+    IncorrectCredentialsException
+)
