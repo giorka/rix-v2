@@ -8,6 +8,7 @@ from dependencies import (
     DatabaseProvider,
     RepositoryProvider,
     ServiceProvider,
+    UseCaseProvider
 )
 
 
@@ -19,6 +20,7 @@ async def main() -> None:
             DatabaseProvider(),
             RepositoryProvider(),
             ServiceProvider(),
+            UseCaseProvider()
         ),
         app=application
     )
