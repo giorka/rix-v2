@@ -23,13 +23,6 @@ def get_application() -> FastAPI:
 
 
 def get_server(application: FastAPI) -> uvicorn.Server:
-    server = uvicorn.Server(
-        uvicorn.Config(
-            app=application,
-            host='0.0.0.0',
-            port=7000,
-            reload=settings.debug
-        )
-    )
+    server = uvicorn.Server(uvicorn.Config(app=application, host='0.0.0.0', port=7000, reload=settings.debug))
 
     return server
