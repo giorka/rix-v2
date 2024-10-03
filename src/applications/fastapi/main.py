@@ -6,7 +6,12 @@ routers: list[APIRouter] = []
 
 
 def get_application() -> FastAPI:
-    application = FastAPI()
+    application = FastAPI(
+        title='RIX',
+        description='RIX API',
+        docs_url='/api/docs',
+        version='dev',
+    )
     api_router = APIRouter(prefix='/api')
 
     for router in routers:
