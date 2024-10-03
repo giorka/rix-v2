@@ -1,11 +1,11 @@
 from typing import AsyncIterable
 
-from dishka import provide, Provider, Scope
-from sqlalchemy.ext.asyncio import async_sessionmaker, AsyncEngine, AsyncSession, create_async_engine
-
 from config import settings
 from domain import services
 from infrastructure.gateways.repositories import alchemy as repositories
+
+from dishka import Provider, Scope, provide
+from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession, async_sessionmaker, create_async_engine
 
 
 class DatabaseProvider(Provider):
