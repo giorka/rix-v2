@@ -1,7 +1,7 @@
 from typing import AsyncIterable
 
 from config import settings
-from domain import services
+from domain import services, usecases
 from infrastructure.gateways.repositories import alchemy as repositories
 
 from dishka import Provider, Scope, provide
@@ -35,4 +35,16 @@ class RepositoryProvider(Provider):
 class ServiceProvider(Provider):
     @provide(scope=Scope.REQUEST)
     def get_user_service(self, user_repository: repositories.UserRepository) -> services.UserService:
-        return services.UserService(user_repository, user_repository.session)
+        return services.UserService(user_repository)
+
+
+class UseCaseProvider(Provider):
+    @provide(scope=Scope.REQUEST)
+    def get_register_user_use_case(
+        self, service: services.UserService, uow: AsyncSession
+    ) -> usecases.RegisterUserUseCase:
+        return usecases.RegisterUserUseCase(service, uow)  # noqa because AsyncSession is AsyncUnitOfWork Protocol
+
+    @provide(scope=Scope.REQUEST)
+    def get_login_user_use_case(self, service: services.UserService, uow: AsyncSession) -> usecases.LoginUserUseCase:
+        return usecases.LoginUserUseCase(service, uow)  # noqa because AsyncSession is AsyncUnitOfWork Protocol
