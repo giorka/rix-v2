@@ -7,7 +7,7 @@ from applications.fastapi import get_application, get_server
 from dependencies import (
     DatabaseProvider,
     RepositoryProvider,
-    ServiceProvider
+    ServiceProvider,
 )
 
 
@@ -18,7 +18,7 @@ async def main() -> None:
         make_async_container(
             DatabaseProvider(),
             RepositoryProvider(),
-            ServiceProvider()
+            ServiceProvider(),
         ),
         app=application
     )
