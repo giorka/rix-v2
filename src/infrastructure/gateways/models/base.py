@@ -2,13 +2,7 @@ from sqlalchemy.orm.decl_api import DeclarativeBase, declared_attr
 
 
 def to_snake_case(string: str) -> str:
-    return ''.join(
-        [
-            '_' + char.lower() if char.isupper()
-            else char
-            for char in string
-        ]
-    ).strip('_')
+    return ''.join(['_' + char.lower() if char.isupper() else char for char in string]).strip('_')
 
 
 class IModel(DeclarativeBase):
