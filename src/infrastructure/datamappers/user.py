@@ -1,6 +1,7 @@
 from dataclasses import asdict
 
 from domain.entities import UserEntity
+
 from ..gateways.models import UserModel
 
 
