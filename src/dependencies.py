@@ -11,19 +11,11 @@ from sqlalchemy.ext.asyncio import AsyncEngine, AsyncSession, async_sessionmaker
 class DatabaseProvider(Provider):
     @provide(scope=Scope.APP)
     def get_engine(self) -> AsyncEngine:
-        return create_async_engine(
-            settings.db.url,
-            echo=False,
-            pool_recycle=180
-        )
+        return create_async_engine(settings.db.url, echo=False, pool_recycle=180)
 
     @provide(scope=Scope.APP)
     def get_session_maker(self, engine: AsyncEngine) -> async_sessionmaker[AsyncSession]:
-        return async_sessionmaker(
-            engine,
-            expire_on_commit=False,
-            class_=AsyncSession
-        )
+        return async_sessionmaker(engine, expire_on_commit=False, class_=AsyncSession)
 
     @provide(scope=Scope.REQUEST)
     async def get_session(self, factory: async_sessionmaker[AsyncSession]) -> AsyncIterable[AsyncSession]:
