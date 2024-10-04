@@ -1,7 +1,7 @@
 from argon2 import PasswordHasher  # noqa
 
 from config import settings
-from .base import Password, HashedPassword
+from domain.typealiases import *
 
 hasher = PasswordHasher()
 
