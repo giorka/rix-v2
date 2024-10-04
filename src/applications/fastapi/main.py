@@ -1,8 +1,9 @@
 import uvicorn
 from config import settings
+from .users import router as users_router
 from fastapi import FastAPI, APIRouter
 
-routers: list[APIRouter] = []
+routers: list[APIRouter] = [users_router]
 
 
 def get_application() -> FastAPI:
