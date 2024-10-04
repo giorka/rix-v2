@@ -1,9 +1,9 @@
-from argon2 import PasswordHasher  # noqa
+import argon2  # noqa
 
 from config import settings
 from domain.typealiases import *
 
-hasher = PasswordHasher()
+hasher = argon2.PasswordHasher()
 
 
 def make_password(password: Password) -> HashedPassword:
@@ -11,4 +11,9 @@ def make_password(password: Password) -> HashedPassword:
 
 
 def check_password(hashed_password: HashedPassword, password: Password) -> bool:
-    return hasher.verify(hashed_password, password)
+    try:
+        hasher.verify(hashed_password, password)
+    except argon2.exceptions.VerifyMismatchError:
+        return False
+    else:
+        return True
