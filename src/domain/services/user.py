@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-
+from domain import exceptions
 from domain.entities import UserEntity
 from domain.exceptions import UserAlreadyExistsException
 from domain.interfaces.repositories import AbstractUserRepository
