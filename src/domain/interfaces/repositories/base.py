@@ -1,5 +1,4 @@
 from abc import ABC
 
 
-class AbstractRepository(ABC):
-    ...
+class AbstractRepository(ABC): ...
