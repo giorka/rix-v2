@@ -1,6 +1,7 @@
-from abc import abstractmethod, ABC
+from abc import ABC, abstractmethod
 
 from domain.entities import UserEntity
+
 from .base import AbstractRepository
 
 
