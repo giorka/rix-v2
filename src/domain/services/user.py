@@ -1,26 +1,19 @@
-from dataclasses import dataclass
 from domain import exceptions
 from domain.entities import UserEntity
 from domain.interfaces.repositories import AbstractUserRepository
-from domain.security import encrypt
-from domain.uow import AsyncUnitOfWork
+from domain.typealiases import *
 
 
-@dataclass
 class UserService:
-    _repository: AbstractUserRepository
-    _uow: AsyncUnitOfWork
+    def __init__(self, repository: AbstractUserRepository) -> None:
+        self._repository = repository
 
-    async def register(self, username: str, password: str) -> UserEntity:
+    async def register(self, username: Username, password: Password) -> UserEntity:
         if await self.get_by_username(username) is not None:
             raise exceptions.UserAlreadyExistsException(username)
 
-        hashed_password = encrypt(password)
-
-        entity = UserEntity(username, hashed_password)
+        entity = UserEntity(username, password)
         self._repository.create(entity)
-
-        await self._uow.commit()
 
         return entity
 

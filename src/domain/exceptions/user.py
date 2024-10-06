@@ -1,4 +1,7 @@
+from ast import Pass
 from dataclasses import dataclass
+
+from domain.typealiases import *
 
 from . import IException
 
@@ -14,7 +17,7 @@ class IUserException(IException):
 class UserAlreadyExistsException(IUserException):
     """Raised when trying to create a user that already exists"""
 
-    username: str
+    username: Username
 
     @property
     def message(self):
@@ -25,7 +28,7 @@ class UserAlreadyExistsException(IUserException):
 class UserDoesNotExistException(IUserException):
     """Raised when trying to create a user that does not exist"""
 
-    username: str
+    username: Username
 
     @property
     def message(self):
@@ -36,9 +39,9 @@ class UserDoesNotExistException(IUserException):
 class IncorrectCredentialsException(IUserException):
     """Raised when trying to log into a user account when credentials are incorrect"""
 
-    username: str
-    password: str
+    username: Username
+    password: Password
 
     @property
     def message(self):
-        return f'{self.username}\'s Password Does Not Match {self.password}'
+        return f"{self.username}'s Password Does Not Match {self.password}"

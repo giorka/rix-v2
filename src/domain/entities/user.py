@@ -1,11 +1,11 @@
 from dataclasses import dataclass
 
-from domain.typealiases import HashedPassword, Password
+from domain.typealiases import *
 
 from . import IEntity
 
 
 @dataclass
 class UserEntity(IEntity):
-    username: str
+    username: Username
     password: Password | HashedPassword

@@ -14,7 +14,7 @@ jwt = JwtAccessBearer(secret_key=settings.singing_secret, refresh_expires_delta=
 
 @dataclass
 class Payload:
-    username: str
+    username: Username
 
 
 def get_user_payload(user: UserEntity) -> Payload:
