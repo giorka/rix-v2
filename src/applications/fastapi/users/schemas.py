@@ -35,5 +35,10 @@ class RegisterUserRequestSchema(ISchema):
         return password
 
 
+class LoginUserRequestSchema(ISchema):
+    username: Username
+    password: Password
+
+
 class LoginUserResponseSchema(ISchema):
     token: JWT
