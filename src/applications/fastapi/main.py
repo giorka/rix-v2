@@ -1,7 +1,9 @@
-import uvicorn
 from config import settings
+from fastapi import APIRouter, FastAPI
+
 from .users import router as users_router
-from fastapi import FastAPI, APIRouter
+
+import uvicorn
 
 routers: list[APIRouter] = [users_router]
 
