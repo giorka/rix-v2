@@ -1,15 +1,10 @@
 import asyncio
 
+from applications.fastapi import get_application, get_server
+from dependencies import DatabaseProvider, RepositoryProvider, ServiceProvider, UseCaseProvider
+
 from dishka import make_async_container
 from dishka.integrations.fastapi import setup_dishka
-
-from applications.fastapi import get_application, get_server
-from dependencies import (
-    DatabaseProvider,
-    RepositoryProvider,
-    ServiceProvider,
-    UseCaseProvider
-)
 
 
 async def main() -> None:
@@ -20,9 +15,9 @@ async def main() -> None:
             DatabaseProvider(),
             RepositoryProvider(),
             ServiceProvider(),
-            UseCaseProvider()
+            UseCaseProvider(),
         ),
-        app=application
+        app=application,
     )
 
     await get_server(application).serve()
