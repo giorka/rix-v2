@@ -1,27 +1,20 @@
-import asyncio
+from setup.app_factory import get_app, get_container
+from setup.config import Settings
+from setup.logs import setup_logging
 
-from applications.fastapi import get_application, get_server
-from dependencies import DatabaseProvider, RepositoryProvider, ServiceProvider, UseCaseProvider
-
-from dishka import make_async_container
-from dishka.integrations.fastapi import setup_dishka
+import uvicorn
 
 
-async def main() -> None:
-    application = get_application()
+def main():
+    settings = Settings()  # type: ignore
 
-    setup_dishka(
-        make_async_container(
-            DatabaseProvider(),
-            RepositoryProvider(),
-            ServiceProvider(),
-            UseCaseProvider(),
-        ),
-        app=application,
-    )
+    setup_logging(settings)
 
-    await get_server(application).serve()
+    container = get_container(settings)
+    app = get_app(container)
+
+    uvicorn.run(app, host=settings.server.host, port=settings.server.port)
 
 
 if __name__ == '__main__':
-    asyncio.run(main())
+    main()
